@@ -1,0 +1,55 @@
+{
+  "printables": [
+    {
+      "id": "pr-adhkaar-kids",
+      "title": "Morning & Evening Adhkaar for Kids",
+      "kind": "adhkaar",
+      "price": 3.5,
+      "size": "PDF · 14MB",
+      "ages": "For children",
+      "payhip": "https://payhip.com/b/cyQZj",
+      "description": "Help your child build a daily habit of remembering Allah, at the start of the day and before sleep. This printable gathers the morning and evening adhkaar into a simple resource your family can keep close and use every day.",
+      "includes": [
+        "Morning adhkaar",
+        "Evening adhkaar",
+        "Printable PDF to use at home"
+      ],
+      "image": "",
+      "featured": true
+    },
+    {
+      "id": "pr-word-search",
+      "title": "Little Muslim Word Search",
+      "kind": "wordsearch",
+      "price": 3.5,
+      "size": "PDF · 12MB",
+      "ages": "For children",
+      "payhip": "https://payhip.com/b/4Qeig",
+      "description": "Twenty colourful word searches, each introducing an Islamic theme such as the names of the prophets, the pillars of faith and words from the Qur'an. Easy-to-read grids make them ideal for family weekends, homeschooling, Islamic studies classes, travel and quiet time.",
+      "includes": [
+        "20 word search puzzles",
+        "Islamic themes in every puzzle",
+        "Easy-to-read grids"
+      ],
+      "image": "",
+      "featured": true
+    },
+    {
+      "id": "pr-dua-parents",
+      "title": "Du'a for Parents",
+      "kind": "dua",
+      "price": 0,
+      "size": "PDF · 13MB",
+      "ages": "For children",
+      "payhip": "https://payhip.com/b/N2nYt",
+      "description": "A free printable to help children learn and memorise a Qur'anic du'a for their parents, nurturing gratitude and kindness at home. Pay what you wish, or download it free.",
+      "includes": [
+        "Qur'anic du'a for parents",
+        "Printable for home or classroom",
+        "Free for personal use"
+      ],
+      "image": "",
+      "featured": true
+    }
+  ]
+}

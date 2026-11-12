@@ -1,0 +1,188 @@
+# Wings of Tawakkul admin page settings (Decap CMS)
+backend:
+  name: git-gateway
+  branch: main
+  commit_messages:
+    update: "Update {{collection}}: {{slug}}"
+
+site_url: /
+display_url: /
+logo_url: ""
+media_folder: images
+public_folder: /images
+locale: en
+
+collections:
+  # ---------------- BOOKS ----------------
+  - name: shop
+    label: "Shop"
+    editor: { preview: false }
+    files:
+      - name: books
+        label: "Books"
+        file: content/books.json
+        format: json
+        fields:
+          - label: "Books"
+            name: books
+            widget: list
+            summary: "{{fields.title}} {{fields.subtitle}} · SGD {{fields.price}}"
+            collapsed: true
+            add_to_top: true
+            fields:
+              - { label: "Title", name: title, widget: string }
+              - { label: "Subtitle or level (optional)", name: subtitle, widget: string, required: false, hint: "e.g. Level 2, or Escaping The Pack" }
+              - { label: "Price (SGD)", name: price, widget: number, value_type: float, min: 0, step: 0.1, required: false, hint: "Leave empty to show 'Price on request'" }
+              - { label: "Payhip link", name: payhip, widget: string, required: false, hint: "e.g. https://payhip.com/b/zR5bq" }
+              - label: "Availability"
+                name: status
+                widget: select
+                default: available
+                options:
+                  - { label: "Available", value: available }
+                  - { label: "Coming soon", value: coming_soon }
+                  - { label: "Sold out", value: sold_out }
+              - { label: "Book photo", name: image, widget: image, required: false, hint: "Front cover, portrait shape. Without a photo, a designed cover is shown." }
+              - { label: "Ages", name: ages, widget: string, hint: "e.g. Age 6, or Ages 7–14" }
+              - { label: "Description", name: description, widget: text }
+              - { label: "Key points", name: highlights, widget: list, field: { label: "Point", name: point, widget: string }, required: false }
+              - label: "Shop categories"
+                name: categories
+                widget: select
+                multiple: true
+                options:
+                  - { label: "Islamic Children's Books", value: childrens }
+                  - { label: "Islamic Learning Resources", value: learning }
+                  - { label: "Qur'an & Tadabbur", value: quran }
+                  - { label: "Educational Activities", value: activities }
+              - { label: "Show on homepage", name: featured, widget: boolean, default: false, required: false }
+              - label: "Series"
+                name: series
+                widget: string
+                hint: "e.g. Quranic Tarbiyah, Umm Assad Publications, Abdullah Hakeem series"
+              - label: "Publisher"
+                name: publisher
+                widget: string
+                hint: "e.g. Quranic Tarbiyah, or Umm Assad Publications"
+              - { label: "Format", name: format, widget: string, default: "Paperback" }
+              - label: "Designed cover colour (used when there's no photo)"
+                name: cover_colour
+                widget: select
+                default: navy
+                options: [navy, ink, slate, dusk, clay, plum, moss, sand]
+              - { label: "Designed cover letter or number", name: cover_letter, widget: string, required: false, hint: "e.g. the level number" }
+              - { label: "Web address name (don't change after publishing)", name: id, widget: string, required: false, hint: "Leave empty for new books. Lowercase and hyphens only" }
+
+      - name: printables
+        label: "Printables"
+        file: content/printables.json
+        format: json
+        fields:
+          - label: "Printables"
+            name: printables
+            widget: list
+            summary: "{{fields.title}} · SGD {{fields.price}}"
+            collapsed: true
+            add_to_top: true
+            fields:
+              - { label: "Title", name: title, widget: string }
+              - { label: "Price (SGD)", name: price, widget: number, value_type: float, min: 0, step: 0.1, hint: "0 = free" }
+              - { label: "Payhip link", name: payhip, widget: string }
+              - { label: "Cover image (optional)", name: image, widget: image, required: false }
+              - { label: "File details", name: size, widget: string, default: "PDF", hint: "e.g. PDF · 14MB" }
+              - { label: "Who it's for", name: ages, widget: string, default: "For children" }
+              - { label: "Description", name: description, widget: text }
+              - { label: "What's inside", name: includes, widget: list, field: { label: "Item", name: item, widget: string }, required: false }
+              - label: "Type (sets the designed cover)"
+                name: kind
+                widget: select
+                default: activity
+                options:
+                  - { label: "Adhkaar", value: adhkaar }
+                  - { label: "Du'a", value: dua }
+                  - { label: "Word search", value: wordsearch }
+                  - { label: "Tracker", value: tracker }
+                  - { label: "Worksheet", value: worksheet }
+                  - { label: "Cards", value: cards }
+                  - { label: "Activity", value: activity }
+              - { label: "Web address name (don't change after publishing)", name: id, widget: string, required: false, hint: "Leave empty for new printables" }
+
+  # ---------------- JOURNAL ----------------
+  - name: journal
+    label: "Journal"
+    editor: { preview: false }
+    files:
+      - name: posts
+        label: "Articles"
+        file: content/journal.json
+        format: json
+        fields:
+          - label: "Articles"
+            name: posts
+            widget: list
+            summary: "{{fields.date}} · {{fields.title}}"
+            collapsed: true
+            add_to_top: true
+            fields:
+              - { label: "Title", name: title, widget: string }
+              - label: "Topic"
+                name: category
+                widget: select
+                options: ["Islamic Tarbiyah", "Raising Muslim Children", "Qur'an & Sunnah", "Beneficial Reading", "Homeschooling & Learning", "Reflections"]
+              - { label: "Date", name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+              - { label: "Short summary (for cards)", name: excerpt, widget: text }
+              - { label: "Introduction under the title", name: standfirst, widget: text }
+              - { label: "Article", name: body, widget: markdown, hint: "For a Qur'an quote: use the quote button. Put the Arabic on its own line, and the reference on a last line starting with — " }
+              - { label: "Image (optional)", name: image, widget: image, required: false }
+              - { label: "Minutes to read", name: readTime, widget: number, value_type: int, min: 1, default: 4 }
+              - { label: "Feature at the top of the journal", name: featured, widget: boolean, default: false, required: false }
+              - { label: "Word on the designed image (when no photo)", name: cover_word, widget: string, required: false }
+              - label: "Designed image colour"
+                name: cover_colour
+                widget: select
+                default: slate
+                options: [navy, ink, slate, dusk, clay, plum, moss, sand]
+              - { label: "Web address name (don't change after publishing)", name: slug, widget: string, required: false, hint: "Leave empty for new articles" }
+
+  # ---------------- PAGES & SETTINGS ----------------
+  - name: site
+    label: "Pages & settings"
+    editor: { preview: false }
+    files:
+      - name: settings
+        label: "Homepage & settings"
+        file: content/settings.json
+        format: json
+        fields:
+          - { label: "Instagram username (without @)", name: instagram, widget: string }
+          - { label: "Top announcement bar", name: announcement, widget: string }
+          - { label: "Homepage headline, line 1", name: hero_line_1, widget: string }
+          - { label: "Homepage headline, line 2 (italic)", name: hero_line_2, widget: string, required: false }
+          - { label: "Homepage introduction", name: hero_text, widget: text }
+          - { label: "Our story (homepage)", name: story, widget: text, hint: "Leave an empty line between paragraphs" }
+          - { label: "Newsletter heading", name: newsletter_heading, widget: string }
+          - { label: "Newsletter text", name: newsletter_text, widget: text }
+      - name: pages
+        label: "About, FAQ, Shipping & Privacy"
+        file: content/pages.json
+        format: json
+        fields:
+          - { label: "About: headline", name: about_title, widget: string }
+          - { label: "About: introduction", name: about_intro, widget: text }
+          - { label: "About: main text", name: about_body, widget: markdown }
+          - label: "About: what we look for"
+            name: about_values
+            widget: list
+            fields:
+              - { label: "Title", name: title, widget: string }
+              - { label: "Text", name: text, widget: text }
+          - { label: "About: closing text", name: about_closing, widget: markdown }
+          - label: "FAQ"
+            name: faq
+            widget: list
+            summary: "{{fields.question}}"
+            fields:
+              - { label: "Question", name: question, widget: string }
+              - { label: "Answer", name: answer, widget: text }
+          - { label: "Shipping & returns", name: shipping, widget: markdown }
+          - { label: "Privacy policy", name: privacy, widget: markdown }
